@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Employee {
 
     private String fullName;
@@ -6,7 +8,7 @@ public class Employee {
     static int Counter;
     private int id;
 
-    public Employee(int id, String fullName, String departmentEmployee, int salaryEmployee) {
+    public Employee(String fullName, String departmentEmployee, int salaryEmployee) {
         this.fullName = fullName;
         this.departmentEmployee = departmentEmployee;
         this.salaryEmployee = salaryEmployee;
@@ -43,9 +45,22 @@ public class Employee {
         this.salaryEmployee = salaryEmployee;
     }
 
+
+    @Override
     public String toString() {
-        return "Id: " + id + " ФИО: " + fullName + " Отдел: " + departmentEmployee + " Зарплата: " + salaryEmployee;
+        return "ID: " + id + " Сотрудник: " + fullName + " отдел: " + departmentEmployee + " зарплата: " + salaryEmployee;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return salaryEmployee == employee.salaryEmployee && id == employee.id && fullName.equals(employee.fullName) && departmentEmployee.equals(employee.departmentEmployee);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, departmentEmployee, salaryEmployee, id);
+    }
 }
