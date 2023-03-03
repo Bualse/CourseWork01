@@ -74,9 +74,9 @@ public class Main {
         employees[0] = new Employee("Иванов И. И., ", "менджмент, ", 120_000);
         employees[1] = new Employee("Сидорова О. В., ", "секретариат, ", 78_000);
         employees[2] = new Employee("Свиридов П. В., ", "закупки, ", 57_000);
-        employees[3] = new Employee("Захаркин Т. Л., ", "ItDev, ", 98_000);
+        employees[3] = new Employee("Захаркин Т. Л., ", "JavaDev, ", 350_000);
         employees[4] = new Employee("Пупкин С. К., ", "логистика, ", 110_000);
-        employees[5] = new Employee("Жук В. В., ", "логистика, ", 69_000);
+        employees[5] = new Employee("Жуков В. В., ", "клининг, ", 30_000);
         employees[6] = new Employee("Разина У. Д., ", "бухгалтерия, ", 87_000);
         employees[7] = new Employee("Малков Д. С., ", "менеджмент, ", 89_000);
         employees[8] = new Employee("Пикаль Л. И., ", "логистика, ", 79_000);
