@@ -131,7 +131,7 @@ public class Main {
             sum += t.getSalaryEmployee();
 //            10 employees
         }
-        System.out.println("Среднее значение зарплаты в месяц: " + sum / 10);
+        System.out.println("Среднее значение зарплаты в месяц: " + sum / employees.length);
     }
 
     public static void printListFullNameEmployees() {
