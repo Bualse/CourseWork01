@@ -2,17 +2,17 @@ import java.util.Objects;
 
 public class Employee {
 
-    private String fullName;
-    private String departmentEmployee;
+    private final String fullName;
+    private int departmentEmployee;
     private int salaryEmployee;
-    static int сounter;
-    private int id;
+    static int Counter;
+    private final int id;
 
-    public Employee(String fullName, String departmentEmployee, int salaryEmployee) {
+    public Employee(String fullName, int departmentEmployee, int salaryEmployee) {
         this.fullName = fullName;
         this.departmentEmployee = departmentEmployee;
         this.salaryEmployee = salaryEmployee;
-        this.id = ++сounter;
+        this.id = ++Counter;
     }
 
     public String getFullName() {
@@ -20,7 +20,7 @@ public class Employee {
         return fullName;
     }
 
-    public String getDepartmentEmployee() {
+    public int getDepartmentEmployee() {
 
         return departmentEmployee;
     }
@@ -35,7 +35,7 @@ public class Employee {
         return id;
     }
 
-    public void setDepartmentEmployee(String departmentEmployee) {
+    public void setDepartmentEmployee(int departmentEmployee) {
 
         this.departmentEmployee = departmentEmployee;
     }
@@ -48,7 +48,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "ID: " + id + " Сотрудник: " + fullName + " отдел: " + departmentEmployee + " зарплата: " + salaryEmployee;
+        return "ID: " + id + " Сотрудник: " + fullName + " отдел: " + departmentEmployee + ", зарплата: " + salaryEmployee;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return salaryEmployee == employee.salaryEmployee && id == employee.id && fullName.equals(employee.fullName) && departmentEmployee.equals(employee.departmentEmployee);
+        return departmentEmployee == employee.departmentEmployee && salaryEmployee == employee.salaryEmployee && id == employee.id && fullName.equals(employee.fullName);
     }
 
     @Override
