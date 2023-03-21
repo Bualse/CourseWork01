@@ -36,7 +36,7 @@
             – Программа работает корректно при изменении любых данных о сотрудниках и выводит верный результат.*/
 
 public class Main {
-    public static final Employee[] employees = new Employee[10];
+    private static final Employee[] employees = new Employee[10];
 
     public static void main(String[] args) {
         System.out.println("Базовая сложность.");
@@ -80,12 +80,13 @@ public class Main {
         employees[5] = new Employee("Жуков В. В., ", 3, 30_000);
         employees[6] = new Employee("Разина У. Д., ", 4, 87_000);
         employees[7] = new Employee("Малков Д. С., ", 1, 89_000);
-        employees[8] = new Employee("Пикаль Л. И., ", 2, 79_000);
+        employees[8] = new Employee("Пикуль Л. И., ", 2, 79_000);
         employees[9] = new Employee("Смальков О. Д., ", 2, 77_000);
 
         for (Employee i : employees) {
             System.out.println(i);
         }
+
 
         System.out.println("Сотрудник с максимальной зарплатой: " + findEmployeeWithMaxSalary());
         System.out.println("Сотрудник с минимальной зарплатой: " + findEmployeeWithMinSalary());
@@ -112,37 +113,33 @@ public class Main {
 
         System.out.println("Повышенная сложность.");
         System.out.println("Пункт 1.");
-        printIndexSalary();
+        System.out.println("Зарплата сотрудников после индексации на 15%: ");
+        printIndexSalary(0.15);
         System.out.println();
-
-        System.out.println("Зарплата после индексации на 15%: " + printIndexSalary111(0.15));
-
-        System.out.println();
-
         System.out.println("Пункт 2.");
         System.out.println("a.  Сотрудник с минимальной зарплатой: " + findMinSalaryEmployee());
         System.out.println("b.  Сотрудник с максимальной зарплатой: " + findMaxSalaryEmployee());
-        System.out.println("c.  Сумму затрат на зарплату по отделу: " + findTotalSalaryPerDepartment(2));
-        System.out.println("d.  Среднюю зарплату по отделу: " + findMiddleSalaryPerDepartment(2));
-        System.out.println("e.  Зарплата всех сотрудников отдела, после индексации: " + calculateTotalSalaryPerDepartment(1, 0.15));
+        System.out.println("c.  Сумму затрат на зарплату по отделу: " + findTotalSalaryPerDepartment(3));
+        System.out.println("d.  Средняя зарплата по отделу: ");
+        findMiddleSalaryPerDepartment(3);
+        System.out.println("e.  Зарплата всех сотрудников отдела, после индексации: ");
+        calculateTotalSalaryPerDepartment(2, 0.1);;
         System.out.println("f. Список всех сотрудников отдела: ");
-        printListAllEmployees();
+        printListAllEmployees(1);
         System.out.println();
         System.out.println("Пункт 3.");
-        System.out.println("a. Список сотрудников: ");
-        printAllEmployeesWithLowerSalary();
+        System.out.println("a. Список сотрудников с зарплатой меньше индекса: ");
+        printAllEmployeesWithLowerSalary(95_000);
         System.out.println();
-        System.out.println("b. Список сотрудников: " );
-        printAllEmployeesWithBiggerSalary();
-
-
+        System.out.println("b. Список сотрудников с зарплатой больше индекса: " );
+        printAllEmployeesWithBiggerSalary(95_000);
 
 
     }
 
 
-    private static int findEmployeeWithMaxSalary() {
-        int salary = employees[0].getSalaryEmployee();
+    private static double findEmployeeWithMaxSalary() {
+        double salary = employees[0].getSalaryEmployee();
 
         for (Employee employee : employees) {
             if (salary < employee.getSalaryEmployee()) {
@@ -152,8 +149,8 @@ public class Main {
         return salary;
     }
 
-    private static int findEmployeeWithMinSalary() {
-        int salary = employees[0].getSalaryEmployee();
+    private static double findEmployeeWithMinSalary() {
+        double salary = employees[0].getSalaryEmployee();
 
         for (Employee employee : employees) {
             if (salary > employee.getSalaryEmployee()) {
@@ -182,7 +179,6 @@ public class Main {
 
     private static void printListFullNameEmployees() {
 
-
         String sum = new String();
         for (Employee t : employees) {
             sum += t.getFullName();
@@ -190,25 +186,14 @@ public class Main {
         System.out.println("Ф.И.О. всех сотрудников: " + sum);
     }
 
-    private static void printIndexSalary() {
-        double indexPercent = 0.15;
+    /* ПОВЫШЕННЫЙ УРОВЕНЬ */
+    private static void printIndexSalary(double indexPercent) {
 
-        int sum;
-        for (Employee i : employees) {
-            sum = i.getSalaryEmployee();
-            System.out.print("Зарплата после индексации на 15%: ");
-            System.out.println(sum + (sum * indexPercent));
+        for (Employee employee : employees) {
+            employee.setSalaryEmployee (((employee.getSalaryEmployee() * indexPercent) + employee.getSalaryEmployee()));
+            System.out.println("ID: " + employee.getId() + ", Ф.И.О.: " + employee.getFullName() + "Департамент: " + employee.getDepartmentEmployee()
+                    + ", зарплата: " + employee.getSalaryEmployee());
         }
-    }
-
-//  2 вариант почему то только последнего сотрудника отдела считает
-    private static double printIndexSalary111(double indexPercent) {
-
-        int sum = 0;
-        for (Employee i : employees) {
-            sum = i.getSalaryEmployee();
-        }
-        return sum + (sum * indexPercent);
     }
 
     private static Employee findMinSalaryEmployee() {
@@ -233,9 +218,9 @@ public class Main {
         return result;
     }
 
-    private static int findTotalSalaryPerDepartment( int numberDept) {
+    private static double findTotalSalaryPerDepartment( int numberDept) {
 
-        int sum = 0;
+        double sum = 0;
         for (Employee i : employees) {
             if (numberDept == i.getDepartmentEmployee()) {
                 sum = sum + i.getSalaryEmployee();
@@ -244,59 +229,59 @@ public class Main {
         return sum;
     }
 
-    private static int findMiddleSalaryPerDepartment(int num) {
+    /*  d. Среднюю зарплату по отделу (учесть, что количество людей в отделе отличается от employees.length).
+     */
+    private static void findMiddleSalaryPerDepartment(int numberDept) {
 
-        int sum = 0;
-        for (Employee t : employees) {
-            if (num == t.getDepartmentEmployee()) {
-                sum = sum + t.getSalaryEmployee();
+        int counter;
+        for (Employee employee: employees) {
+            if (numberDept == employee.getDepartmentEmployee()) {
+
+
             }
         }
-        return sum / 3;
+    }
+    /*А почему делишь на 3? А что если сотрудников в отделе 5. Тут нужно в цикле посчитать количество сотрудников, сделать еще одну переменную счетчик.*/
+
+    private static void calculateTotalSalaryPerDepartment(int numberDept, double indexPercent) {
+
+        for (Employee employee: employees) {
+            if (numberDept == employee.getDepartmentEmployee()) {
+                employee.setSalaryEmployee (((employee.getSalaryEmployee() * indexPercent) + employee.getSalaryEmployee()));
+                System.out.println("ID: " + employee.getId() + ", Ф.И.О.: " + employee.getFullName() + "Департамент: " + employee.getDepartmentEmployee()
+                        + ", зарплата: " + employee.getSalaryEmployee());
+            }
+        }
     }
 
-// почему то только последнего сотрудника отдела считает
-    private static int calculateTotalSalaryPerDepartment(int numberDept, double indexPercent) {
-        int salary = 0;
+    private static void printListAllEmployees(int numberDept) {
+
         for (Employee t : employees) {
             if (numberDept == t.getDepartmentEmployee()) {
-                salary = t.getSalaryEmployee();
-                salary = (int) (salary + (salary * indexPercent));
+                System.out.println("ID: " + t.getId() + ", Ф.И.О.: " + t.getFullName() + "зарплата: " + t.getSalaryEmployee());
             }
         }
-        return salary;
     }
 
-    private static void printListAllEmployees() {
-
-        for (Employee t : employees) {
-            System.out.println("ID: " + t.getId() + ", Ф.И.О.: " + t.getFullName() + "зарплата: " + t.getSalaryEmployee());
-        }
-    }
-
-    private static void printAllEmployeesWithLowerSalary() {
-        int salary = 95_000;
+    private static int printAllEmployeesWithLowerSalary(int index) {
 
         for (Employee i : employees) {
-            if (i.getSalaryEmployee() < salary) {
+            if (i.getSalaryEmployee() < index) {
                 System.out.println("ID: " + i.getId() + ", Ф.И.О.: " + i.getFullName() + "зарплата: " + i.getSalaryEmployee());
             }
         }
+        return index;
     }
 
-    private static void printAllEmployeesWithBiggerSalary() {
-        int salary = 95_000;
+    private static int printAllEmployeesWithBiggerSalary(int index) {
 
         for (Employee i : employees) {
-            if (i.getSalaryEmployee() > salary) {
+            if (i.getSalaryEmployee() > index) {
                 System.out.println("ID: " + i.getId() + ", Ф.И.О.: " + i.getFullName() + "зарплата: " + i.getSalaryEmployee());
             }
         }
+        return index;
     }
-
-
-
-
 }
 
 

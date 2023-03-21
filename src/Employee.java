@@ -4,15 +4,15 @@ public class Employee {
 
     private final String fullName;
     private int departmentEmployee;
-    private int salaryEmployee;
-    static int Counter;
+    private double salaryEmployee;
+    private static int counter;
     private final int id;
 
-    public Employee(String fullName, int departmentEmployee, int salaryEmployee) {
+    public Employee(String fullName, int departmentEmployee, double salaryEmployee) {
         this.fullName = fullName;
         this.departmentEmployee = departmentEmployee;
         this.salaryEmployee = salaryEmployee;
-        this.id = ++Counter;
+        this.id = ++counter;
     }
 
     public String getFullName() {
@@ -25,7 +25,7 @@ public class Employee {
         return departmentEmployee;
     }
 
-    public int getSalaryEmployee() {
+    public double getSalaryEmployee() {
 
         return salaryEmployee;
     }
@@ -40,11 +40,10 @@ public class Employee {
         this.departmentEmployee = departmentEmployee;
     }
 
-    public void setSalaryEmployee(int salaryEmployee) {
 
+    public void setSalaryEmployee(double salaryEmployee) {
         this.salaryEmployee = salaryEmployee;
     }
-
 
     @Override
     public String toString() {
