@@ -120,8 +120,8 @@ public class Main {
         System.out.println("a.  Сотрудник с минимальной зарплатой: " + findMinSalaryEmployee());
         System.out.println("b.  Сотрудник с максимальной зарплатой: " + findMaxSalaryEmployee());
         System.out.println("c.  Сумму затрат на зарплату по отделу: " + findTotalSalaryPerDepartment(3));
-        System.out.println("d.  Средняя зарплата по отделу: ");
-        findMiddleSalaryPerDepartment(3);
+        System.out.println("d.  Средняя зарплата по отделу: " + findMiddleSalaryPerDepartment(3));
+
         System.out.println("e.  Зарплата всех сотрудников отдела, после индексации: ");
         calculateTotalSalaryPerDepartment(2, 0.1);;
         System.out.println("f. Список всех сотрудников отдела: ");
@@ -229,19 +229,18 @@ public class Main {
         return sum;
     }
 
-    /*  d. Среднюю зарплату по отделу (учесть, что количество людей в отделе отличается от employees.length).
-     */
-    private static void findMiddleSalaryPerDepartment(int numberDept) {
+    private static double findMiddleSalaryPerDepartment(int numberDept) {
 
-        int counter;
-        for (Employee employee: employees) {
-            if (numberDept == employee.getDepartmentEmployee()) {
-
-
+        double sum = 0;
+        int counter = 0;
+        for (Employee t : employees) {
+            if (numberDept == t.getDepartmentEmployee()) {
+                sum = sum + t.getSalaryEmployee();
+                counter++;
             }
         }
+        return sum/counter;
     }
-    /*А почему делишь на 3? А что если сотрудников в отделе 5. Тут нужно в цикле посчитать количество сотрудников, сделать еще одну переменную счетчик.*/
 
     private static void calculateTotalSalaryPerDepartment(int numberDept, double indexPercent) {
 
